@@ -98,6 +98,8 @@ le benchmark avant la configuration de Hermes.
   l’architecture récente `qwen4_exp` ;
 - offload en RAM de la table PLE ;
 - correctif ciblé du résolveur PLE pour le checkpoint hybride NVFP4/FP8 ;
+- normalisation ciblée de `qwen_sparse_attention` vers le chemin QSA appelé
+  `full_attention` dans l’image vLLM day-zero ;
 - CUDA Graphs sur le décodage et MTP spéculatif ;
 - custom all-reduce désactivé sur SM120 ;
 - API limitée à la boucle locale.
@@ -112,6 +114,6 @@ Références :
 
 Le modèle est désaligné et sa couche de refus a été retirée. Son utilisation
 doit rester conforme au droit applicable et inclure les garde-fous nécessaires.
-Le correctif PLE est volontairement strict : le build échoue si la structure du
-fichier vLLM change afin d’éviter d’appliquer silencieusement une modification
-incompatible.
+Les deux correctifs vLLM sont volontairement stricts : le build échoue si la
+structure des fichiers ciblés change afin d’éviter d’appliquer silencieusement
+une modification incompatible.

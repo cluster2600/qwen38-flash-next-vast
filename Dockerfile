@@ -5,8 +5,10 @@ LABEL org.opencontainers.image.source="https://github.com/cluster2600/qwen38-fla
 LABEL org.opencontainers.image.description="Qwen3.8 Flash Next Uncensored NVFP4 on two Blackwell GPUs with vLLM"
 LABEL org.opencontainers.image.licenses="MIT"
 
-COPY scripts/patch_ple.py /opt/qwen/patch_ple.py
-RUN python3 /opt/qwen/patch_ple.py && rm /opt/qwen/patch_ple.py
+COPY scripts/patch_ple.py scripts/patch_qwen_config.py /opt/qwen/
+RUN python3 /opt/qwen/patch_ple.py \
+    && python3 /opt/qwen/patch_qwen_config.py \
+    && rm /opt/qwen/patch_ple.py /opt/qwen/patch_qwen_config.py
 
 COPY scripts/start.sh /opt/qwen/start.sh
 COPY scripts/start-background.sh /opt/qwen/start-background.sh
