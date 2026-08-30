@@ -1,0 +1,24 @@
+name: Checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate scripts
+        run: |
+          bash -n scripts/start.sh scripts/start-background.sh
+          python3 -m py_compile scripts/patch_ple.py scripts/healthcheck.py scripts/benchmark.py
+      - name: Validate Dockerfile references
+        run: |
+          test -s Dockerfile
+          test -s README.md
+          grep -F 'orcarouter/Qwen3.8-Flash-Next-Uncensored-NVFP4' Dockerfile
+          grep -F '127.0.0.1' scripts/start.sh
