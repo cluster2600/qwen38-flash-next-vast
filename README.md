@@ -10,6 +10,12 @@ L’image publiée est :
 ghcr.io/cluster2600/qwen38-flash-next-vast:latest
 ```
 
+Référence immuable du premier build validé :
+
+```text
+ghcr.io/cluster2600/qwen38-flash-next-vast@sha256:daa7d2ac790d70500f304cad6c38c3f0e8dfbf76c14f20a5a07b5a113e4f006f
+```
+
 Elle ne contient ni les poids du modèle, ni jeton Hugging Face, ni autre secret.
 Le dépôt Hugging Face étant soumis à acceptation, `HF_TOKEN` doit être fourni à
 l’instance par l’utilisateur. Les poids représentent environ 189 Go ; prévoir au
