@@ -44,6 +44,7 @@ Le conteneur lit les variables suivantes :
 | `MAX_NUM_SEQS` | `8` | concurrence, multiple de 4 |
 | `GPU_MEMORY_UTILIZATION` | `0.95` | budget VRAM vLLM |
 | `SPECULATIVE_TOKENS` | `3` | profondeur MTP |
+| `NCCL_P2P_DISABLE` | `1` | évite le deadlock NCCL des doubles Blackwell sous IOMMU/ACS |
 
 Exécution directe :
 
@@ -102,6 +103,7 @@ le benchmark avant la configuration de Hermes.
   `full_attention` dans l’image vLLM day-zero ;
 - CUDA Graphs sur le décodage et MTP spéculatif ;
 - custom all-reduce désactivé sur SM120 ;
+- P2P NCCL désactivé par défaut pour tolérer les hôtes Vast avec IOMMU/ACS ;
 - API limitée à la boucle locale.
 
 Références :
