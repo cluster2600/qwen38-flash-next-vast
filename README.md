@@ -10,10 +10,10 @@ L’image publiée est :
 ghcr.io/cluster2600/qwen38-flash-next-vast:latest
 ```
 
-Référence immuable du premier build validé :
+Référence immuable du build corrigé et validé :
 
 ```text
-ghcr.io/cluster2600/qwen38-flash-next-vast@sha256:daa7d2ac790d70500f304cad6c38c3f0e8dfbf76c14f20a5a07b5a113e4f006f
+ghcr.io/cluster2600/qwen38-flash-next-vast@sha256:6b3b1790dd3140c27a5b5f85181dccef06c8d96c02f3003bb3c9b267b8758e34
 ```
 
 Elle ne contient ni les poids du modèle, ni jeton Hugging Face, ni autre secret.
