@@ -40,7 +40,7 @@ Le conteneur lit les variables suivantes :
 | --- | --- | --- |
 | `HF_TOKEN` | requis | accès au dépôt Hugging Face soumis à acceptation |
 | `HF_HOME` | `/workspace/huggingface` | cache persistant des poids |
-| `MAX_MODEL_LEN` | `32768` | contexte maximal exposé à Hermes |
+| `MAX_MODEL_LEN` | `262144` | contexte natif maximal exposé à Hermes |
 | `MAX_NUM_SEQS` | `8` | concurrence, multiple de 4 |
 | `GPU_MEMORY_UTILIZATION` | `0.95` | budget VRAM vLLM |
 | `SPECULATIVE_TOKENS` | `3` | profondeur MTP |
@@ -50,7 +50,6 @@ Exécution directe :
 
 ```bash
 docker run --rm --gpus '"device=0,1"' --ipc=host \
-  --cap-add=SYS_PTRACE \
   -e HF_TOKEN \
   -v /chemin/vers/le/cache:/workspace/huggingface \
   ghcr.io/cluster2600/qwen38-flash-next-vast:latest
@@ -97,8 +96,7 @@ le benchmark avant la configuration de Hermes.
 
 - image vLLM temporaire `vllm/vllm-openai:qwen38-flash-next`, nécessaire à
   l’architecture récente `qwen4_exp` ;
-- offload en RAM de la table PLE ;
-- correctif ciblé du résolveur PLE pour le checkpoint hybride NVFP4/FP8 ;
+- offload en RAM de la table PLE BF16 ;
 - normalisation ciblée de `qwen_sparse_attention` vers le chemin QSA appelé
   `full_attention` dans l’image vLLM day-zero ;
 - CUDA Graphs sur le décodage et MTP spéculatif ;

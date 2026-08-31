@@ -15,7 +15,7 @@ jobs:
       - name: Validate scripts
         run: |
           bash -n scripts/start.sh scripts/start-background.sh
-          python3 -m py_compile scripts/patch_ple.py scripts/patch_qwen_config.py scripts/healthcheck.py scripts/benchmark.py
+          python3 -m py_compile scripts/patch_qwen_config.py scripts/healthcheck.py scripts/benchmark.py
       - name: Validate Dockerfile references
         run: |
           test -s Dockerfile

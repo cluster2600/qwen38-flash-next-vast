@@ -5,10 +5,9 @@ LABEL org.opencontainers.image.source="https://github.com/cluster2600/qwen38-fla
 LABEL org.opencontainers.image.description="Qwen3.8 Flash Next Uncensored NVFP4 on two Blackwell GPUs with vLLM"
 LABEL org.opencontainers.image.licenses="MIT"
 
-COPY scripts/patch_ple.py scripts/patch_qwen_config.py /opt/qwen/
-RUN python3 /opt/qwen/patch_ple.py \
-    && python3 /opt/qwen/patch_qwen_config.py \
-    && rm /opt/qwen/patch_ple.py /opt/qwen/patch_qwen_config.py
+COPY scripts/patch_qwen_config.py /opt/qwen/
+RUN python3 /opt/qwen/patch_qwen_config.py \
+    && rm /opt/qwen/patch_qwen_config.py
 
 COPY scripts/start.sh /opt/qwen/start.sh
 COPY scripts/start-background.sh /opt/qwen/start-background.sh
@@ -22,11 +21,10 @@ ENV MODEL_ID=orcarouter/Qwen3.8-Flash-Next-Uncensored-NVFP4 \
     SERVED_MODEL_NAME=qwen3.8-flash-next-uncensored-nvfp4 \
     HF_HOME=/workspace/huggingface \
     VLLM_PLE_CPU_OFFLOAD=1 \
-    VLLM_PLE_FORCE_FP8=1 \
     VLLM_USE_DEEP_GEMM=0 \
     VLLM_MOE_USE_DEEP_GEMM=0 \
     NCCL_P2P_DISABLE=1 \
-    PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
+    PYTORCH_CUDA_ALLOC_CONF=expandable_segments:False \
     VLLM_ALLOW_LONG_MAX_MODEL_LEN=1 \
     CUDA_DEVICE_ORDER=PCI_BUS_ID
 
